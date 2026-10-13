@@ -10,9 +10,11 @@ function Sidebar({
   onClose,
 }) {
   const [search, setSearch] = useState('')
-  const showRecentDocument = activeDocument?.name
-    .toLocaleLowerCase()
-    .includes(search.trim().toLocaleLowerCase())
+  const normalizedSearch = search.trim().toLocaleLowerCase()
+  const showRecentDocument = Boolean(
+    activeDocument?.name
+      && activeDocument.name.toLocaleLowerCase().includes(normalizedSearch),
+  )
 
   return (
     <aside className="sidebar" aria-label="Workspace navigation" inert={inert}>
